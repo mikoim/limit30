@@ -1,7 +1,21 @@
 language: c
 
+env:
+  global:
+    - secure: "XJiVvsoZMWFOTQyYnokEiPyco5ppKsuX19K5Awdm1CZL2QrRkjm05XO5pkvPyeM0U4SOEjAKxfgbH+/SHe4rvezKeIypoOKln36OIAVfu8HJX906cXr5QQwvS74ODXVvpJLstWR0+aoqmRwjnlRKPWJAccQaW8F8Ghg34JcONOQ="
+
 compiler:
   - clang
   - gcc
 
 script: cmake . && make clean && make
+
+addons:
+  coverity_scan:
+    project:
+      name: "mikoim/limit30"
+      description: "Build submitted via Travis CI"
+    notification_email: omochi@luna.miko.im
+    build_command_prepend: "cmake . && make clean"
+    build_command:   "make"
+    branch_pattern: master
